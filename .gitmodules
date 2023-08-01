@@ -1,0 +1,3 @@
+[submodule "src/global/proto"]
+	path = src/global/proto
+	url = https://github.com/NULL-SoftwareMeisterHighSchool/proto-buffer.git
