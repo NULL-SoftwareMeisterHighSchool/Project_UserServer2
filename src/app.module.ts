@@ -4,7 +4,8 @@ import { AuthModule } from './domain/auth/auth.module';
 import { CommentModule } from './domain/comment/comment.module';
 import { UserModule } from './domain/user/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { TypeORMConfig } from './global/config';
+import { JwtConfig, TypeORMConfig } from './global/config';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   imports: [
@@ -12,7 +13,9 @@ import { TypeORMConfig } from './global/config';
     AuthModule,
     CommentModule,
     UserModule,
+
     TypeOrmModule.forRoot(TypeORMConfig),
+    JwtModule.register(JwtConfig),
   ],
 })
 export class AppModule {}
