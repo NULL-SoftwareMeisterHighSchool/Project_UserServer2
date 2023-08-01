@@ -1,0 +1,64 @@
+syntax = "proto3";
+package commnets;
+
+option go_package = "github.com/NULL-SoftwareMeisterHighSchool/Project_FileServer/common/grpc/server/pb/comments;comments_pb";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+
+message CreateCommentRequest {
+    uint32 articleID = 1;
+    uint32 authorID = 2;
+    string body = 3;
+    optional uint32 replyTo = 4;
+    optional uint32 mentionUserID = 5;
+}
+
+message DeleteCommnetRequest {
+    uint32 commentID = 1;
+    uint32 articleID = 2;
+    uint32 userID = 3;
+}
+
+message GetCommentsByArticleIDRequest {
+    uint32 articleID = 1;
+    optional uint32 userID = 2;
+}
+
+message CommentElem {
+    uint32 commentID = 1;
+    uint32 authorID = 2;
+    string body = 3;
+    google.protobuf.Timestamp createdAt = 4; 
+    uint32 replyCount = 5;
+    optional uint32 mentionUserID = 6;
+}
+
+message GetCommentsByArticleIDResponse {
+    repeated CommentElem comments = 1;
+}
+
+message GetRepliesByCommentIDRequest {
+    uint32 commentID = 1;
+    uint32 articleID = 2;
+    optional uint32 userID = 3;
+}
+
+message ReplyElem {
+    uint32 commentID = 1;
+    uint32 authorID = 2;
+    string body = 3;
+    google.protobuf.Timestamp createdAt = 4; 
+    optional uint32 mentionUserID = 5;
+}
+
+message GetRepliesByCommentIDResponse {
+    repeated ReplyElem replies = 1;
+}
+
+service CommentService {
+    rpc CreateComment (CreateCommentRequest) returns (google.protobuf.Empty);
+    rpc DeleteCommnet (DeleteCommnetRequest) returns (google.protobuf.Empty);
+    rpc GetCommentsByArticleID (GetCommentsByArticleIDRequest) returns (GetCommentsByArticleIDResponse);
+    rpc GetRepliesByCommentID (GetRepliesByCommentIDRequest) returns (GetRepliesByCommentIDResponse);
+}
