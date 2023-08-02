@@ -45,6 +45,7 @@ export class StudentSignupService {
       githubID: request.githubID,
       name: request.name,
       schoolType: request.school,
+      stat: {},
     });
     await this.userRepository.save(user);
   }

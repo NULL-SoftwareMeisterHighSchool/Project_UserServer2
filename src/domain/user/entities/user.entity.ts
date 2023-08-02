@@ -44,7 +44,7 @@ export class User {
   @Column({ enum: SchoolType })
   schoolType: SchoolType;
 
-  @OneToOne(() => Stat)
+  @OneToOne(() => Stat, { cascade: true })
   stat: Stat;
 
   @ManyToMany(() => Stack)
