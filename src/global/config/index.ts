@@ -1,2 +1,2 @@
 export { TypeORMConfig } from './typeorm.config';
-export { JwtConfig } from './jwt.config';
+export { JwtConfig, JwtModuleConfig } from './jwt.config';
