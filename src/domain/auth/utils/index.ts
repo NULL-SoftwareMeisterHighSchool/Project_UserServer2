@@ -1,1 +1,1 @@
-export { PasswordEncoder } from './password.encoder';
+export { PasswordManager } from './password.encoder';
