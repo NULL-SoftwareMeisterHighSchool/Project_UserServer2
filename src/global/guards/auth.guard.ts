@@ -6,6 +6,7 @@ import {
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { Observable } from 'rxjs';
+import { UserInfo } from '../types/user-info.type';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -16,7 +17,9 @@ export class AuthGuard implements CanActivate {
   ): boolean | Promise<boolean> | Observable<boolean> {
     const request = context.switchToHttp().getRequest<Request>();
 
-    const payload = this.jwtService.verify(this.getAccessToken(request));
+    const payload = this.jwtService.verify<UserInfo>(
+      this.getAccessToken(request),
+    );
     if (payload == null) throw new UnauthorizedException();
 
     request['user'] = payload;
