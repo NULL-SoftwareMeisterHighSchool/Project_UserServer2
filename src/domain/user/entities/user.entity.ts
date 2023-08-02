@@ -1,10 +1,20 @@
-import { Column, Entity, ManyToMany, OneToOne } from 'typeorm';
+import {
+  Column,
+  Entity,
+  ManyToMany,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { SchoolType } from '../enums';
 import { Stack } from './stack.entity';
+import { Stat } from './stat.entity';
 
 @Entity()
 export class User {
-  @Column()
+  @PrimaryGeneratedColumn({ unsigned: true })
+  id: number;
+
+  @Column({ unique: true })
   accountName: string;
 
   @Column()
@@ -34,8 +44,8 @@ export class User {
   @Column({ enum: SchoolType })
   schoolType: SchoolType;
 
-  @OneToOne(() => User)
-  user: User;
+  @OneToOne(() => Stat)
+  stat: Stat;
 
   @ManyToMany(() => Stack)
   stacks: Stack[];
