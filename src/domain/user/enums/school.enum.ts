@@ -1,6 +1,6 @@
 export enum SchoolType {
-  DSM,
-  DGSM,
-  BSM,
-  GSM,
+  DSM = 'DSM',
+  DGSM = 'DGSM',
+  BSM = 'BSM',
+  GSM = 'GSM',
 }
