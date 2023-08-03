@@ -8,14 +8,16 @@ import {
   InvalidAdmissionYearException,
   InvalidEmailException,
   SchoolEmailMismatchException,
+  UnverifiedEmailException,
 } from '../exceptions';
-import { PasswordManager } from '../utils';
+import { MailVerificationManager, PasswordManager } from '../utils';
 
 @Injectable()
 export class StudentSignupService {
   constructor(
     private readonly userRepository: UserRepository,
     private readonly passwordManager: PasswordManager,
+    private readonly mailVerificationManager: MailVerificationManager,
   ) {}
 
   async execute(request: StudentSignupRequestDto): Promise<void> {
@@ -29,6 +31,10 @@ export class StudentSignupService {
 
     if (this.isYearInvalid(request.school, request.admissionYear)) {
       throw new InvalidAdmissionYearException();
+    }
+
+    if (this.isEmailUnverified(request.email)) {
+      throw new UnverifiedEmailException();
     }
 
     if (await this.isDuplicateAccountName(request.accountName)) {
@@ -68,6 +74,10 @@ export class StudentSignupService {
     const max = new Date().getFullYear();
 
     return admissionYear < min || admissionYear > max;
+  }
+
+  private async isEmailUnverified(email: string): Promise<boolean> {
+    return await this.mailVerificationManager.isVerified(email);
   }
 
   private async isDuplicateAccountName(accountName: string): Promise<boolean> {
