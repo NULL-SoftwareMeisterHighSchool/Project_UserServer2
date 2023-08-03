@@ -37,4 +37,9 @@ export class MailVerificationManager {
       this.EXPIRES_IN,
     );
   }
+
+  async check(email: string, code: string): Promise<boolean> {
+    const value = await this.cacheService.get(this.PREFIX, email);
+    return value === code;
+  }
 }
