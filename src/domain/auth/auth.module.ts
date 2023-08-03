@@ -10,6 +10,7 @@ import {
   LoginService,
   LogoutService,
   RefreshService,
+  SendMailService,
   StudentSignupService,
 } from './services';
 import { MailModule } from 'src/global/modules/mail/mail.module';
@@ -24,6 +25,7 @@ import { CacheModule } from 'src/global/modules/cache/cache.module';
     LoginService,
     LogoutService,
     RefreshService,
+    SendMailService,
 
     // utils
     PasswordManager,
