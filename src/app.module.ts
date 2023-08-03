@@ -7,6 +7,7 @@ import { UserModule } from './domain/user/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { JwtModuleConfig, TypeORMConfig } from './global/config';
 import { JwtModule } from '@nestjs/jwt';
+import { CacheModule } from './global/modules/cache/cache.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { JwtModule } from '@nestjs/jwt';
 
     // global
     MailModule,
+    CacheModule,
 
     TypeOrmModule.forRoot(TypeORMConfig),
     JwtModule.register(JwtModuleConfig),
