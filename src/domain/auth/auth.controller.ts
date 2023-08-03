@@ -4,8 +4,13 @@ import {
   RefreshRequestDto,
   StudentSignupRequestDto,
 } from './dto/request';
-import { LoginService, LogoutService, StudentSignupService } from './services';
-import { LoginResponseDto } from './dto/response';
+import {
+  LoginService,
+  LogoutService,
+  RefreshService,
+  StudentSignupService,
+} from './services';
+import { LoginResponseDto, RefreshResponseDto } from './dto/response';
 
 @Controller('auth')
 export class AuthController {
@@ -13,6 +18,7 @@ export class AuthController {
     private readonly studentSignupService: StudentSignupService,
     private readonly loginService: LoginService,
     private readonly logoutService: LogoutService,
+    private readonly refreshService: RefreshService,
   ) {}
 
   @Post('signup/student')
@@ -30,5 +36,13 @@ export class AuthController {
   @HttpCode(HttpStatus.OK)
   async logout(@Body() request: RefreshRequestDto): Promise<void> {
     return await this.logoutService.execute(request);
+  }
+
+  @Post('refresh')
+  @HttpCode(HttpStatus.OK)
+  async refresh(
+    @Body() request: RefreshRequestDto,
+  ): Promise<RefreshResponseDto> {
+    return await this.refreshService.execute(request);
   }
 }
