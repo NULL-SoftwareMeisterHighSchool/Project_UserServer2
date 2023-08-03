@@ -12,6 +12,7 @@ import {
   RefreshService,
   SendMailService,
   StudentSignupService,
+  VerifyService,
 } from './services';
 import { MailModule } from 'src/global/modules/mail/mail.module';
 import { CacheModule } from 'src/global/modules/cache/cache.module';
@@ -26,6 +27,7 @@ import { CacheModule } from 'src/global/modules/cache/cache.module';
     LogoutService,
     RefreshService,
     SendMailService,
+    VerifyService,
 
     // utils
     PasswordManager,
