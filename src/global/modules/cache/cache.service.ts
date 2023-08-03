@@ -17,6 +17,11 @@ export class CacheService {
   }
 
   async get(prefix: string, key: string): Promise<string> {
-    return await this.cache.get(`${prefix}:${key}`);
+    return await this.cache.get<string>(`${prefix}:${key}`);
+  }
+
+  async has(prefix: string, key: string): Promise<boolean> {
+    const value = await this.cache.get<string>(`${prefix}:${key}`);
+    return value != null;
   }
 }
