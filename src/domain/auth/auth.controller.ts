@@ -2,12 +2,14 @@ import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
 import {
   LoginRequestDto,
   RefreshRequestDto,
+  SendMailRequestDto,
   StudentSignupRequestDto,
 } from './dto/request';
 import {
   LoginService,
   LogoutService,
   RefreshService,
+  SendMailService,
   StudentSignupService,
 } from './services';
 import { LoginResponseDto, RefreshResponseDto } from './dto/response';
@@ -19,6 +21,7 @@ export class AuthController {
     private readonly loginService: LoginService,
     private readonly logoutService: LogoutService,
     private readonly refreshService: RefreshService,
+    private readonly sendMailService: SendMailService,
   ) {}
 
   @Post('signup/student')
@@ -44,5 +47,11 @@ export class AuthController {
     @Body() request: RefreshRequestDto,
   ): Promise<RefreshResponseDto> {
     return await this.refreshService.execute(request);
+  }
+
+  @Post('send-mail')
+  @HttpCode(HttpStatus.OK)
+  async sendMail(@Body() request: SendMailRequestDto): Promise<void> {
+    return await this.sendMailService.execute(request);
   }
 }
