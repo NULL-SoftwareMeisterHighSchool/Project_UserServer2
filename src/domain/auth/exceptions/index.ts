@@ -4,3 +4,4 @@ export { InvalidAdmissionYearException } from './invalid-admission-year.exceptio
 export { DuplicateAccountNameException } from './duplicate-account-name.exception';
 export { InvalidCredentialsException } from './invalid-credentials.exception';
 export { InvalidRefreshTokenException } from './invalid-refresh-token.exception';
+export { EmailCodeMismatchException } from './email-code-mismatch.exception';
