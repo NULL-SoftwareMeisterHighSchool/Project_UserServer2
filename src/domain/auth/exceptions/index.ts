@@ -5,3 +5,4 @@ export { DuplicateAccountNameException } from './duplicate-account-name.exceptio
 export { InvalidCredentialsException } from './invalid-credentials.exception';
 export { InvalidRefreshTokenException } from './invalid-refresh-token.exception';
 export { EmailCodeMismatchException } from './email-code-mismatch.exception';
+export { UnverifiedEmailException } from './unverified-email.exception';
