@@ -4,6 +4,7 @@ import {
   RefreshRequestDto,
   SendMailRequestDto,
   StudentSignupRequestDto,
+  VerifyRequestDto,
 } from './dto/request';
 import {
   LoginService,
@@ -11,6 +12,7 @@ import {
   RefreshService,
   SendMailService,
   StudentSignupService,
+  VerifyService,
 } from './services';
 import { LoginResponseDto, RefreshResponseDto } from './dto/response';
 
@@ -22,6 +24,7 @@ export class AuthController {
     private readonly logoutService: LogoutService,
     private readonly refreshService: RefreshService,
     private readonly sendMailService: SendMailService,
+    private readonly verifyService: VerifyService,
   ) {}
 
   @Post('signup/student')
@@ -53,5 +56,11 @@ export class AuthController {
   @HttpCode(HttpStatus.OK)
   async sendMail(@Body() request: SendMailRequestDto): Promise<void> {
     return await this.sendMailService.execute(request);
+  }
+
+  @Post('verify')
+  @HttpCode(HttpStatus.OK)
+  async verify(request: VerifyRequestDto): Promise<void> {
+    return await this.verifyService.execute(request);
   }
 }
