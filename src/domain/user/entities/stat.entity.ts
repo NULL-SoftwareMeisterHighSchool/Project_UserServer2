@@ -1,8 +1,11 @@
-import { Column, Entity, OneToOne } from 'typeorm';
+import { Column, Entity, OneToOne, PrimaryColumn } from 'typeorm';
 import { User } from './user.entity';
 
 @Entity()
 export class Stat {
+  @PrimaryColumn()
+  userId: number;
+
   @Column()
   contributionCount: number;
 
@@ -18,6 +21,6 @@ export class Stat {
   @Column()
   contributedRepositoryCount: number;
 
-  @OneToOne(() => User)
+  @OneToOne(() => User, (user) => user.stat)
   user: User;
 }
