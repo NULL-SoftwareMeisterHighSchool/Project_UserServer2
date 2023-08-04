@@ -4,7 +4,7 @@ import { MailConfig } from 'src/global/config';
 import { MailService } from './mail.service';
 
 @Module({
-  imports: [MailerModule.forRoot(MailConfig)],
+  imports: [MailerModule.forRootAsync({ useFactory: () => MailConfig() })],
   providers: [MailService],
   exports: [MailService],
 })

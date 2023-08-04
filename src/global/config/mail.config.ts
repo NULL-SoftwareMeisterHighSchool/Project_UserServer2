@@ -1,6 +1,6 @@
 import { MailerOptions } from '@nestjs-modules/mailer';
 
-export const MailConfig: MailerOptions = {
+export const MailConfig = (): MailerOptions => ({
   preview: false,
   transport: {
     host: 'smtp.gmail.com',
@@ -10,4 +10,4 @@ export const MailConfig: MailerOptions = {
       pass: process.env.MAIL_PASS,
     },
   },
-};
+});
