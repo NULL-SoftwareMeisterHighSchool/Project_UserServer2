@@ -33,7 +33,7 @@ export class StudentSignupService {
       throw new InvalidAdmissionYearException();
     }
 
-    if (this.isEmailUnverified(request.email)) {
+    if (await this.isEmailUnverified(request.email)) {
       throw new UnverifiedEmailException();
     }
 
@@ -77,7 +77,8 @@ export class StudentSignupService {
   }
 
   private async isEmailUnverified(email: string): Promise<boolean> {
-    return await this.mailVerificationManager.isVerified(email);
+    const verified = await this.mailVerificationManager.isVerified(email);
+    return !verified;
   }
 
   private async isDuplicateAccountName(accountName: string): Promise<boolean> {
