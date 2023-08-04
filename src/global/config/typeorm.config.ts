@@ -1,6 +1,6 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 
-export const TypeORMConfig: TypeOrmModuleOptions = {
+export const TypeORMConfig = (): TypeOrmModuleOptions => ({
   type: 'mysql',
   host: process.env.DB_HOST,
   port: parseInt(process.env.DB_PORT),
@@ -9,4 +9,4 @@ export const TypeORMConfig: TypeOrmModuleOptions = {
   database: process.env.DB_NAME,
   entities: [__dirname + '/../../**/*.entity{.ts,.js}'],
   synchronize: true,
-};
+});
