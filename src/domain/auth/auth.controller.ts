@@ -60,7 +60,7 @@ export class AuthController {
 
   @Post('verify')
   @HttpCode(HttpStatus.OK)
-  async verify(request: VerifyRequestDto): Promise<void> {
+  async verify(@Body() request: VerifyRequestDto): Promise<void> {
     return await this.verifyService.execute(request);
   }
 }
