@@ -3,8 +3,8 @@ import { JwtModuleOptions } from '@nestjs/jwt';
 export const JwtModuleConfig = (): JwtModuleOptions => {
   JwtConfig = {
     secret: process.env.JWT_SECRET,
-    accessExpiresIn: 60 * 60 * 1000, // 1h
-    refreshExpiresIn: 7 * 24 * 60 * 60 * 1000, // 7d
+    accessExpiresIn: 60 * 60, // 1h
+    refreshExpiresIn: 7 * 24 * 60 * 60, // 7d
   };
 
   return {
