@@ -8,6 +8,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { JwtModuleConfig, TypeORMConfig } from './global/config';
 import { JwtModule } from '@nestjs/jwt';
 import { CacheModule } from './global/modules/cache/cache.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
@@ -23,6 +24,12 @@ import { CacheModule } from './global/modules/cache/cache.module';
 
     TypeOrmModule.forRoot(TypeORMConfig),
     JwtModule.register(JwtModuleConfig),
+    ConfigModule.forRoot({
+      envFilePath:
+        process.env.NODE_ENV === 'dev'
+          ? './global/config/dev.env'
+          : './global/config/prod.env',
+    }),
   ],
 })
 export class AppModule {}
