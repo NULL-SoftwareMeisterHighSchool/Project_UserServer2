@@ -1,24 +1,25 @@
-import { Column, Entity, OneToOne, PrimaryColumn } from 'typeorm';
+import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { User } from './user.entity';
 
 @Entity()
 export class Stat {
-  @PrimaryColumn()
-  userId: number;
+  // should change when typeorm supports primary key column for OneToOne join column
+  @PrimaryGeneratedColumn({ unsigned: true })
+  id: number;
 
-  @Column()
+  @Column({ default: '0' })
   contributionCount: number;
 
-  @Column()
+  @Column({ default: '0' })
   starCount: number;
 
-  @Column()
+  @Column({ default: '0' })
   issueCount: number;
 
-  @Column()
+  @Column({ default: '0' })
   pullRequestCount: number;
 
-  @Column()
+  @Column({ default: '0' })
   contributedRepositoryCount: number;
 
   @OneToOne(() => User, (user) => user.stat)

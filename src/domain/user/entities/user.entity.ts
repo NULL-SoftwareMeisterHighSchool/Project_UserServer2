@@ -26,13 +26,13 @@ export class User {
   @Column()
   name: string;
 
-  @Column()
+  @Column({ default: '' })
   bio: string;
 
-  @Column()
+  @Column({ default: '' })
   githubURL: string;
 
-  @Column()
+  @Column({ default: '' })
   portfolioURL: string;
 
   @Column({ unique: true })
