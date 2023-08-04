@@ -16,10 +16,9 @@ import {
 } from './services';
 import { MailModule } from 'src/global/modules/mail/mail.module';
 import { CacheModule } from 'src/global/modules/cache/cache.module';
-import { JwtModule } from 'src/global/modules/jwt';
 
 @Module({
-  imports: [UserModule, CacheModule, MailModule, JwtModule],
+  imports: [UserModule, CacheModule, MailModule],
   controllers: [AuthController],
   providers: [
     // services
