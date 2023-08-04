@@ -49,7 +49,8 @@ export class LoginService {
     candidate: string,
     password: string,
   ): Promise<boolean> {
-    return await this.passwordManager.compare(candidate, password);
+    const matches = await this.passwordManager.compare(candidate, password);
+    return !matches;
   }
 
   private genToken(userInfo: UserInfo, expiresIn: number): string {

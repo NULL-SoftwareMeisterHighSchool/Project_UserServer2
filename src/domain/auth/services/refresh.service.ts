@@ -26,6 +26,7 @@ export class RefreshService {
 
     const now = Date.now();
     const expiresIn = JwtConfig.accessExpiresIn;
+    delete payload['exp'];
 
     const token = this.jwtService.sign(payload, {
       secret: JwtConfig.secret,
