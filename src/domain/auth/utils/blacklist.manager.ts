@@ -8,8 +8,8 @@ export class BlacklistManager {
   constructor(private readonly cacheService: CacheService) {}
 
   async set(token: string, expiresAt: number): Promise<void> {
-    const expiresInMs = expiresAt - Date.now();
-    await this.cacheService.set(this.PREFIX, token, '', expiresInMs);
+    const expiresIn = expiresAt - new Date().getSeconds();
+    await this.cacheService.set(this.PREFIX, token, '', expiresIn);
   }
 
   async exists(token: string): Promise<boolean> {

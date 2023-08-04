@@ -18,15 +18,18 @@ export class RefreshService {
   async execute(request: RefreshRequestDto): Promise<RefreshResponseDto> {
     const { refreshToken } = request;
 
-    const isBlacklisted = await this.blacklistManager.exists(refreshToken);
-    const payload = this.jwtService.verify<UserInfo>(refreshToken);
-    if (payload == null || isBlacklisted) {
+    let payload: UserInfo;
+    try {
+      await this.checkBlacklisted(refreshToken);
+      payload = this.jwtService.verify<UserInfo>(refreshToken);
+    } catch (e) {
       throw new InvalidRefreshTokenException();
     }
 
     const now = Date.now();
     const expiresIn = JwtConfig.accessExpiresIn;
     delete payload['exp'];
+    delete payload['iat'];
 
     const token = this.jwtService.sign(payload, {
       secret: JwtConfig.secret,
@@ -37,5 +40,10 @@ export class RefreshService {
       expiresAt: convertToKorMilli(now + expiresIn),
       accessToken: token,
     };
+  }
+
+  private async checkBlacklisted(token: string): Promise<void> {
+    const isBlacklisted = await this.blacklistManager.exists(token);
+    if (isBlacklisted) throw undefined;
   }
 }

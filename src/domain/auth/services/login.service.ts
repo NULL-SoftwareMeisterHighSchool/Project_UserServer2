@@ -28,7 +28,7 @@ export class LoginService {
       throw new InvalidCredentialsException();
     }
 
-    const userInfo: UserInfo = { ...user };
+    const userInfo: UserInfo = { id: user.id, name: user.name };
     const now = Date.now();
 
     const { accessExpiresIn, refreshExpiresIn } = JwtConfig;

@@ -15,14 +15,19 @@ export class LogoutService {
   async execute(reqeust: RefreshRequestDto): Promise<void> {
     const { refreshToken } = reqeust;
 
-    const isBlacklisted = await this.blacklistManager.exists(refreshToken);
-    const payload = this.jwtService.verify<UserInfo>(refreshToken);
-    if (payload == null || isBlacklisted) {
+    let payload: UserInfo;
+    try {
+      await this.checkBlacklisted(refreshToken);
+      payload = this.jwtService.verify<UserInfo>(refreshToken);
+    } catch (e) {
       throw new InvalidRefreshTokenException();
     }
-
-    const decoded = this.jwtService.decode(refreshToken);
-    const expiresAt = parseInt(decoded['exp']);
+    const expiresAt = parseInt(payload['exp']);
     await this.blacklistManager.set(refreshToken, expiresAt);
+  }
+
+  private async checkBlacklisted(token: string): Promise<void> {
+    const isBlacklisted = await this.blacklistManager.exists(token);
+    if (isBlacklisted) throw undefined;
   }
 }
