@@ -10,9 +10,8 @@ export class CacheService {
     prefix: string,
     key: string,
     value: string,
-    expiresInMs: number,
+    expiresIn: number,
   ): Promise<void> {
-    const expiresIn = expiresInMs / 1000;
     await this.cache.set(`${prefix}:${key}`, value, expiresIn);
   }
 
