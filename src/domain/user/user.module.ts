@@ -10,6 +10,7 @@ import { UserController } from './user.controller';
 import {
   GetMyStatService,
   GetUserService,
+  UpdatePasswordService,
   UpdateUserService,
 } from './services';
 import { PasswordManager } from './utils';
@@ -22,6 +23,7 @@ import { PasswordManager } from './utils';
     GetUserService,
     UpdateUserService,
     GetMyStatService,
+    UpdatePasswordService,
 
     // utils
     PasswordManager,
