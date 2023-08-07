@@ -7,7 +7,6 @@ import { PasswordManager } from '../utils';
 import { JwtService } from '@nestjs/jwt';
 import { UserInfo } from 'src/global/types/user-info.type';
 import { JwtConfig } from 'src/global/config';
-import { convertToKorMilli } from 'src/global/util/lib';
 
 @Injectable()
 export class LoginService {
