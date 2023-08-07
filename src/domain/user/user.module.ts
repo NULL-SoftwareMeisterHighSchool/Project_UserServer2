@@ -12,6 +12,7 @@ import {
   GetUserService,
   UpdatePasswordService,
   UpdateUserService,
+  WithdrawService,
 } from './services';
 import { PasswordManager } from './utils';
 
@@ -24,6 +25,7 @@ import { PasswordManager } from './utils';
     UpdateUserService,
     GetMyStatService,
     UpdatePasswordService,
+    WithdrawService,
 
     // utils
     PasswordManager,
