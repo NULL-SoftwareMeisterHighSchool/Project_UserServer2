@@ -10,8 +10,9 @@ import {
   SchoolEmailMismatchException,
   UnverifiedEmailException,
 } from '../exceptions';
-import { MailVerificationManager, PasswordManager } from '../utils';
+import { MailVerificationManager } from '../utils';
 import { Stat } from 'src/domain/user/entities';
+import { PasswordManager } from 'src/domain/user/utils';
 
 @Injectable()
 export class StudentSignupService {

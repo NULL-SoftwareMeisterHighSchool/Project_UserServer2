@@ -12,6 +12,7 @@ import {
   GetUserService,
   UpdateUserService,
 } from './services';
+import { PasswordManager } from './utils';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Stack, Stat, User])],
@@ -22,11 +23,14 @@ import {
     UpdateUserService,
     GetMyStatService,
 
+    // utils
+    PasswordManager,
+
     // repositories
     StackRepository,
     StatRepository,
     UserRepository,
   ],
-  exports: [UserRepository],
+  exports: [UserRepository, PasswordManager],
 })
 export class UserModule {}

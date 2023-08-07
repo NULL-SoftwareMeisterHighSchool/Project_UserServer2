@@ -3,10 +3,10 @@ import { UserRepository } from 'src/domain/user/repositories';
 import { LoginResponseDto } from '../dto/response';
 import { LoginRequestDto } from '../dto/request';
 import { InvalidCredentialsException } from '../exceptions';
-import { PasswordManager } from '../utils';
 import { JwtService } from '@nestjs/jwt';
 import { UserInfo } from 'src/global/types/user-info.type';
 import { JwtConfig } from 'src/global/config';
+import { PasswordManager } from 'src/domain/user/utils';
 
 @Injectable()
 export class LoginService {
