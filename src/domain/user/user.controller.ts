@@ -1,7 +1,10 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
+  HttpCode,
+  HttpStatus,
   Param,
   ParseIntPipe,
   Patch,
@@ -17,6 +20,7 @@ import {
   GetUserService,
   UpdatePasswordService,
   UpdateUserService,
+  WithdrawService,
 } from './services';
 import { UpdateMeRequestDto, UpdatePasswordRequestDto } from './dto/request';
 
@@ -27,6 +31,7 @@ export class UserController {
     private readonly updateUserService: UpdateUserService,
     private readonly getMyStatService: GetMyStatService,
     private readonly updatePasswordService: UpdatePasswordService,
+    private readonly withdrawService: WithdrawService,
   ) {}
 
   @Get('me')
@@ -72,5 +77,12 @@ export class UserController {
     @Body() request: UpdatePasswordRequestDto,
   ): Promise<void> {
     return await this.updatePasswordService.execute(userInfo.id, request);
+  }
+
+  @Delete('me/withdraw')
+  @HttpCode(HttpStatus.OK)
+  @UseGuards(AuthGuard)
+  async withdraw(@GetUser() userInfo: UserInfo): Promise<void> {
+    return await this.withdrawService.execute(userInfo.id);
   }
 }
