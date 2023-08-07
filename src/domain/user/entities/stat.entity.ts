@@ -22,6 +22,9 @@ export class Stat {
   @Column({ default: '0' })
   contributedRepositoryCount: number;
 
+  @Column({ default: '0' })
+  score: number;
+
   @OneToOne(() => User, (user) => user.stat)
   user: User;
 }

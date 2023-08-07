@@ -3,11 +3,10 @@ import { UserRepository } from 'src/domain/user/repositories';
 import { LoginResponseDto } from '../dto/response';
 import { LoginRequestDto } from '../dto/request';
 import { InvalidCredentialsException } from '../exceptions';
-import { PasswordManager } from '../utils';
 import { JwtService } from '@nestjs/jwt';
 import { UserInfo } from 'src/global/types/user-info.type';
 import { JwtConfig } from 'src/global/config';
-import { convertToKorMilli } from 'src/global/util/lib';
+import { PasswordManager } from 'src/domain/user/utils';
 
 @Injectable()
 export class LoginService {
@@ -36,11 +35,11 @@ export class LoginService {
     return {
       access: {
         token: this.genToken(userInfo, accessExpiresIn),
-        expiresAt: convertToKorMilli(now + accessExpiresIn),
+        expiresAt: now + accessExpiresIn * 1000,
       },
       refresh: {
         token: this.genToken(userInfo, refreshExpiresIn),
-        expiresAt: convertToKorMilli(now + refreshExpiresIn),
+        expiresAt: now + refreshExpiresIn * 1000,
       },
     };
   }

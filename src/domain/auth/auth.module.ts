@@ -1,11 +1,7 @@
 import { Module } from '@nestjs/common';
 import { AuthController } from './auth.controller';
 import { UserModule } from '../user/user.module';
-import {
-  BlacklistManager,
-  MailVerificationManager,
-  PasswordManager,
-} from './utils';
+import { BlacklistManager, MailVerificationManager } from './utils';
 import {
   LoginService,
   LogoutService,
@@ -30,7 +26,6 @@ import { CacheModule } from 'src/global/modules/cache/cache.module';
     VerifyService,
 
     // utils
-    PasswordManager,
     BlacklistManager,
     MailVerificationManager,
   ],

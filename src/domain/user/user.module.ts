@@ -7,11 +7,34 @@ import {
   UserRepository,
 } from './repositories';
 import { UserController } from './user.controller';
+import {
+  GetMyStatService,
+  GetUserService,
+  UpdatePasswordService,
+  UpdateUserService,
+  WithdrawService,
+} from './services';
+import { PasswordManager } from './utils';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Stack, Stat, User])],
   controllers: [UserController],
-  providers: [StackRepository, StatRepository, UserRepository],
-  exports: [UserRepository],
+  providers: [
+    // services
+    GetUserService,
+    UpdateUserService,
+    GetMyStatService,
+    UpdatePasswordService,
+    WithdrawService,
+
+    // utils
+    PasswordManager,
+
+    // repositories
+    StackRepository,
+    StatRepository,
+    UserRepository,
+  ],
+  exports: [UserRepository, PasswordManager],
 })
 export class UserModule {}
