@@ -25,12 +25,15 @@ export class AuthGuard implements CanActivate {
       throw new UnauthorizedException();
     }
 
+    delete payload['iat'];
+    delete payload['exp'];
+
     request['user'] = payload;
     return true;
   }
 
   private getAccessToken(request: Request): string {
-    const authorization = request.headers.get('Authorization');
+    const authorization = request.headers['authorization'];
     if (authorization === null || !authorization.startsWith('Bearer ')) {
       return '';
     }
