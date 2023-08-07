@@ -15,17 +15,17 @@ import { GetUserService } from './services';
 export class UserController {
   constructor(private readonly getUserService: GetUserService) {}
 
+  @Get('me')
+  @UseGuards(AuthGuard)
+  async getMe(@GetUser() userInfo: UserInfo): Promise<GetUserResponseDto> {
+    return this.getUserService.execute(userInfo.id);
+  }
+
   @Get(':userID')
   async getUser(
     @Param('userID', ParseIntPipe) userID: number,
   ): Promise<GetUserResponseDto> {
     return this.getUserService.execute(userID);
-  }
-
-  @Get('me')
-  @UseGuards(AuthGuard)
-  async getMe(@GetUser() userInfo: UserInfo): Promise<GetUserResponseDto> {
-    return this.getUserService.execute(userInfo.id);
   }
 
   @Get('me/tiny')
