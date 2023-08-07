@@ -7,7 +7,7 @@ import { UserInfo } from 'src/global/types/user-info.type';
 export class UserController {
   constructor() {}
 
-  @Get('me')
+  @Get('me/tiny')
   @UseGuards(AuthGuard)
   getMe(@GetUser() userInfo: UserInfo): UserInfo {
     return userInfo;

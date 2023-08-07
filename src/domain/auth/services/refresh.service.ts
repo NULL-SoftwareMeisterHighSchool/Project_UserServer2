@@ -37,7 +37,7 @@ export class RefreshService {
     });
 
     return {
-      expiresAt: convertToKorMilli(now + expiresIn),
+      expiresAt: now + expiresIn * 1000,
       accessToken: token,
     };
   }
