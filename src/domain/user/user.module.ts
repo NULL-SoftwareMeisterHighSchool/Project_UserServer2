@@ -7,7 +7,11 @@ import {
   UserRepository,
 } from './repositories';
 import { UserController } from './user.controller';
-import { GetUserService, UpdateUserService } from './services';
+import {
+  GetMyStatService,
+  GetUserService,
+  UpdateUserService,
+} from './services';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Stack, Stat, User])],
@@ -16,6 +20,7 @@ import { GetUserService, UpdateUserService } from './services';
     // services
     GetUserService,
     UpdateUserService,
+    GetMyStatService,
 
     // repositories
     StackRepository,
