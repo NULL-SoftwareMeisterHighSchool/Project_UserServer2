@@ -1,6 +1,7 @@
 import {
   Column,
   Entity,
+  JoinTable,
   ManyToMany,
   OneToOne,
   PrimaryGeneratedColumn,
@@ -47,6 +48,7 @@ export class User {
   @OneToOne(() => Stat, (stat) => stat.user, { cascade: true })
   stat: Stat;
 
-  @ManyToMany(() => Stack)
+  @ManyToMany(() => Stack, { cascade: true })
+  @JoinTable({ name: 'user_stack' })
   stacks: Stack[];
 }
