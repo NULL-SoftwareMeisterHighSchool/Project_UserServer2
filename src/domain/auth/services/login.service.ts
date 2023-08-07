@@ -36,11 +36,11 @@ export class LoginService {
     return {
       access: {
         token: this.genToken(userInfo, accessExpiresIn),
-        expiresAt: convertToKorMilli(now + accessExpiresIn * 1000),
+        expiresAt: now + accessExpiresIn * 1000,
       },
       refresh: {
         token: this.genToken(userInfo, refreshExpiresIn),
-        expiresAt: convertToKorMilli(now + refreshExpiresIn * 1000),
+        expiresAt: now + refreshExpiresIn * 1000,
       },
     };
   }
