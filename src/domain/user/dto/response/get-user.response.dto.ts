@@ -1,4 +1,6 @@
 import { ListArticleElementDto } from 'src/domain/article/dto/response';
+import { User } from '../../entities';
+import { convertToKorDate } from 'src/global/util/lib';
 
 export class GetUserResponseDto {
   public readonly name: string;
@@ -12,4 +14,33 @@ export class GetUserResponseDto {
     general: ListArticleElementDto[];
     tech: ListArticleElementDto[];
   };
+
+  public static of(user: User): GetUserResponseDto {
+    return {
+      ...user,
+      stacks: user.stacks.map((stack) => stack.name),
+      articles: {
+        general: [
+          {
+            id: 123,
+            author: { id: 3, name: '김원욱' },
+            createdAt: convertToKorDate(new Date()),
+            title: '안녕 이건 제목',
+            summary: '안녕 이건 요약',
+            thumbnail: '',
+          },
+        ],
+        tech: [
+          {
+            id: 5,
+            author: { id: 3, name: '김원욱' },
+            createdAt: convertToKorDate(new Date()),
+            title: '안녕 이건 제목',
+            summary: '안녕 이건 요약',
+            thumbnail: 'https://source.unsplash.com/random',
+          },
+        ],
+      },
+    };
+  }
 }
