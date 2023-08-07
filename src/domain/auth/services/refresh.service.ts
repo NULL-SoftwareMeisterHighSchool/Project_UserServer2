@@ -6,7 +6,6 @@ import { RefreshResponseDto } from '../dto/response';
 import { UserInfo } from 'src/global/types/user-info.type';
 import { InvalidRefreshTokenException } from '../exceptions';
 import { JwtConfig } from 'src/global/config';
-import { convertToKorMilli } from 'src/global/util/lib';
 
 @Injectable()
 export class RefreshService {
