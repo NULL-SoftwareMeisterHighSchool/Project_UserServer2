@@ -4,6 +4,7 @@ import {
   Get,
   Param,
   ParseIntPipe,
+  Patch,
   Put,
   UseGuards,
 } from '@nestjs/common';
@@ -14,9 +15,10 @@ import { GetMyStatResponseDto, GetUserResponseDto } from './dto/response';
 import {
   GetMyStatService,
   GetUserService,
+  UpdatePasswordService,
   UpdateUserService,
 } from './services';
-import { UpdateMeRequestDto } from './dto/request';
+import { UpdateMeRequestDto, UpdatePasswordRequestDto } from './dto/request';
 
 @Controller('users')
 export class UserController {
@@ -24,6 +26,7 @@ export class UserController {
     private readonly getUserService: GetUserService,
     private readonly updateUserService: UpdateUserService,
     private readonly getMyStatService: GetMyStatService,
+    private readonly updatePasswordService: UpdatePasswordService,
   ) {}
 
   @Get('me')
@@ -60,5 +63,14 @@ export class UserController {
     @GetUser() userInfo: UserInfo,
   ): Promise<GetMyStatResponseDto> {
     return await this.getMyStatService.execute(userInfo.id);
+  }
+
+  @Patch('me/edit-password')
+  @UseGuards(AuthGuard)
+  async updatePassword(
+    @GetUser() userInfo: UserInfo,
+    @Body() request: UpdatePasswordRequestDto,
+  ): Promise<void> {
+    return await this.updatePasswordService.execute(userInfo.id, request);
   }
 }
