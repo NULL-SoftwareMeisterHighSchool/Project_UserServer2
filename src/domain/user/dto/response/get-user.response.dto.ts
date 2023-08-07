@@ -17,7 +17,11 @@ export class GetUserResponseDto {
 
   public static of(user: User): GetUserResponseDto {
     return {
-      ...user,
+      name: user.name,
+      bio: user.bio,
+      email: user.email,
+      githubURL: user.githubURL,
+      portfolioURL: user.portfolioURL,
       stacks: user.stacks.map((stack) => stack.name),
       articles: {
         general: [
