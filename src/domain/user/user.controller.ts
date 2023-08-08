@@ -6,23 +6,31 @@ import {
   HttpCode,
   HttpStatus,
   Param,
+  ParseEnumPipe,
   ParseIntPipe,
   Patch,
   Put,
+  Query,
   UseGuards,
 } from '@nestjs/common';
 import { GetUser } from 'src/global/decorators/get-user-info.decorator';
 import { AuthGuard } from 'src/global/guards/auth.guard';
 import { UserInfo } from 'src/global/types/user-info.type';
-import { GetMyStatResponseDto, GetUserResponseDto } from './dto/response';
+import {
+  GetMyStatResponseDto,
+  GetRankResponseDto,
+  GetUserResponseDto,
+} from './dto/response';
 import {
   GetMyStatService,
+  GetRankService,
   GetUserService,
   UpdatePasswordService,
   UpdateUserService,
   WithdrawService,
 } from './services';
 import { UpdateMeRequestDto, UpdatePasswordRequestDto } from './dto/request';
+import { SchoolType } from './enums';
 
 @Controller('users')
 export class UserController {
@@ -32,6 +40,7 @@ export class UserController {
     private readonly getMyStatService: GetMyStatService,
     private readonly updatePasswordService: UpdatePasswordService,
     private readonly withdrawService: WithdrawService,
+    private readonly getRankService: GetRankService,
   ) {}
 
   @Get('me')
@@ -47,6 +56,18 @@ export class UserController {
     @Body() request: UpdateMeRequestDto,
   ): Promise<void> {
     return await this.updateUserService.execute(userInfo.id, request);
+  }
+
+  @Get('rank')
+  async getRank(
+    @Query('size', ParseIntPipe)
+    size: number,
+    @Query('school', new ParseEnumPipe(SchoolType, { optional: true }))
+    school?: SchoolType,
+    @Query('grade', new ParseIntPipe({ optional: true }))
+    grade?: number,
+  ): Promise<GetRankResponseDto> {
+    return this.getRankService.execute(size, school, grade);
   }
 
   @Get(':userID')
