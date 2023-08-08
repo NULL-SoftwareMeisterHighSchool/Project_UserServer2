@@ -1,9 +1,8 @@
 import { Module } from '@nestjs/common';
-import { ArticleClient, UserClient } from './clients';
-import { CommentModule } from 'src/domain/comment/comment.module';
+import { ArticleClient, CommentClient, UserClient } from './clients';
 
 @Module({
-  providers: [UserClient, ArticleClient, CommentModule],
-  exports: [UserClient, ArticleClient, CommentModule],
+  providers: [UserClient, ArticleClient, CommentClient],
+  exports: [UserClient, ArticleClient, CommentClient],
 })
 export class GRPCModule {}
