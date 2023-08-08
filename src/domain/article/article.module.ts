@@ -1,7 +1,11 @@
 import { Module } from '@nestjs/common';
 import { ArticleController } from './article.controller';
 import { GRPCModule } from 'src/global/modules/grpc/grpc.module';
-import { CreateArticleService, GetArticleService } from './services';
+import {
+  CreateArticleService,
+  GetArticleService,
+  UpdateArticleService,
+} from './services';
 import { UserModule } from '../user/user.module';
 
 @Module({
@@ -11,6 +15,7 @@ import { UserModule } from '../user/user.module';
     // services
     CreateArticleService,
     GetArticleService,
+    UpdateArticleService,
   ],
 })
 export class ArticleModule {}
