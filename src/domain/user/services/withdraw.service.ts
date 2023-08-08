@@ -15,7 +15,7 @@ export class WithdrawService {
   async execute(userID: number): Promise<void> {
     const user = await this.userRepository
       .findOneByOrFail({ id: userID })
-      .catch((e) => {
+      .catch(() => {
         throw new UserNotFoundException(userID);
       });
 
