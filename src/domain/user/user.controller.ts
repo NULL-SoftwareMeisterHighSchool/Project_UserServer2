@@ -11,6 +11,7 @@ import {
   Patch,
   Put,
   Query,
+  UseFilters,
   UseGuards,
 } from '@nestjs/common';
 import { GetUser } from 'src/global/decorators/get-user-info.decorator';
@@ -32,8 +33,10 @@ import {
 import { UpdateMeRequestDto, UpdatePasswordRequestDto } from './dto/request';
 import { SchoolType } from './enums';
 import { OptionalGuard } from 'src/global/guards/optional.guard';
+import { RPCExceptionFilter } from 'src/global/exceptions/filters/rpc-exception.filter';
 
 @Controller('users')
+@UseFilters(RPCExceptionFilter)
 export class UserController {
   constructor(
     private readonly getUserService: GetUserService,
