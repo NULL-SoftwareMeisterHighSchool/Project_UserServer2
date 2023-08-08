@@ -61,7 +61,8 @@ export class UpdateGithubStatService {
           'score',
         ],
         ['id'],
-      );
+      )
+      .execute();
   }
 
   private calculateScore(stat: users.GithubStats): number {
