@@ -20,8 +20,10 @@ export class RPCExceptionFilter extends BaseExceptionFilter {
           break;
         case Status.NOT_FOUND:
           exception = new NotFoundException(e.message);
+          break;
         case Status.PERMISSION_DENIED:
           exception = new ForbiddenException(e.message);
+          break;
       }
     }
     super.catch(exception, host);
