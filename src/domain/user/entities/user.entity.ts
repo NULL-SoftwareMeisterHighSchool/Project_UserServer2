@@ -48,7 +48,7 @@ export class User {
   @OneToOne(() => Stat, (stat) => stat.user, { cascade: true })
   stat: Stat;
 
-  @ManyToMany(() => Stack, { cascade: true })
+  @ManyToMany(() => Stack, { cascade: ['insert'] })
   @JoinTable({ name: 'user_stack' })
   stacks: Stack[];
 }
