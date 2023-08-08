@@ -12,9 +12,10 @@ import {
 } from './services';
 import { MailModule } from 'src/global/modules/mail/mail.module';
 import { CacheModule } from 'src/global/modules/cache/cache.module';
+import { GRPCModule } from 'src/global/modules/grpc/grpc.module';
 
 @Module({
-  imports: [UserModule, CacheModule, MailModule],
+  imports: [UserModule, CacheModule, MailModule, GRPCModule],
   controllers: [AuthController],
   providers: [
     // services

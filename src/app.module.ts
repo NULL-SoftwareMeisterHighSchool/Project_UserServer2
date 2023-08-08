@@ -9,6 +9,7 @@ import { TypeORMConfig } from './global/config';
 import { CacheModule } from './global/modules/cache/cache.module';
 import { ConfigModule } from '@nestjs/config';
 import { JwtModule } from './global/modules/jwt';
+import { GRPCModule } from './global/modules/grpc/grpc.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { JwtModule } from './global/modules/jwt';
     JwtModule,
     MailModule,
     CacheModule,
+    GRPCModule,
 
     // domain
     ArticleModule,

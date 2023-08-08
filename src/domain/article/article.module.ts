@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { ArticleController } from './article.controller';
-import { ArticleClient } from './client/article.client';
+import { GRPCModule } from 'src/global/modules/grpc/grpc.module';
 
 @Module({
-  imports: [],
+  imports: [GRPCModule],
   controllers: [ArticleController],
-  providers: [ArticleClient],
+  providers: [],
 })
 export class ArticleModule {}

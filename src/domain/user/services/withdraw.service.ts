@@ -1,7 +1,7 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { StatRepository, UserRepository } from '../repositories';
 import { UserNotFoundException } from '../exceptions';
-import { UserClient } from '../client/user.client';
+import { UserClient } from 'src/global/modules/grpc/clients';
 
 @Injectable()
 export class WithdrawService {

@@ -16,10 +16,10 @@ import {
   WithdrawService,
 } from './services';
 import { PasswordManager } from './utils';
-import { UserClient } from './client/user.client';
+import { GRPCModule } from 'src/global/modules/grpc/grpc.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Stack, Stat, User])],
+  imports: [TypeOrmModule.forFeature([Stack, Stat, User]), GRPCModule],
   controllers: [UserController],
   providers: [
     // services
@@ -33,14 +33,11 @@ import { UserClient } from './client/user.client';
     // utils
     PasswordManager,
 
-    // client
-    UserClient,
-
     // repositories
     StackRepository,
     StatRepository,
     UserRepository,
   ],
-  exports: [UserRepository, PasswordManager, UserClient],
+  exports: [UserRepository, PasswordManager],
 })
 export class UserModule {}

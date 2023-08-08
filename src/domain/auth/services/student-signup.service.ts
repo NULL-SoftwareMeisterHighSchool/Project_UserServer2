@@ -13,7 +13,7 @@ import {
 import { MailVerificationManager } from '../utils';
 import { Stat } from 'src/domain/user/entities';
 import { PasswordManager } from 'src/domain/user/utils';
-import { UserClient } from 'src/domain/user/client/user.client';
+import { UserClient } from 'src/global/modules/grpc/clients';
 
 @Injectable()
 export class StudentSignupService {
