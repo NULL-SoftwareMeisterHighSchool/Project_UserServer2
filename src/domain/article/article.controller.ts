@@ -51,7 +51,7 @@ export class ArticleController {
     private readonly listArticleService: ListArticleService,
   ) {}
 
-  @Post()
+  @Get()
   @UseGuards(OptionalGuard)
   async listArticle(
     @GetUser() userInfo: UserInfo,
