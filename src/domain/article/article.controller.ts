@@ -15,6 +15,7 @@ import { AuthGuard } from 'src/global/guards/auth.guard';
 import { UserInfo } from 'src/global/types/user-info.type';
 import {
   CreateArticleRequestDto,
+  SetVisibilityReqeustDto,
   UpdateArticleRequestDto,
 } from './dto/request';
 import {
@@ -25,6 +26,7 @@ import {
   CreateArticleService,
   DeleteArticleService,
   GetArticleService,
+  SetVisibilityService,
   UpdateArticleService,
 } from './services';
 import { RPCExceptionFilter } from 'src/global/exceptions/filters/rpc-exception.filter';
@@ -38,6 +40,7 @@ export class ArticleController {
     private readonly getArticleService: GetArticleService,
     private readonly updateArticleService: UpdateArticleService,
     private readonly deleteArticleService: DeleteArticleService,
+    private readonly setVisibilityService: SetVisibilityService,
   ) {}
 
   @Post()
@@ -80,4 +83,12 @@ export class ArticleController {
   ): Promise<void> {
     return await this.deleteArticleService.execute(userInfo, articleID);
   }
+
+  @Put(':id/visibility')
+  @UseGuards(AuthGuard)
+  async setVisibility(
+    @GetUser() userInfo: UserInfo,
+    @Param('id', ParseIntPipe) articleID: number,
+    @Body() request: SetVisibilityReqeustDto,
+  ): Promise<void> {}
 }
