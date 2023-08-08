@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   ParseIntPipe,
@@ -22,6 +23,7 @@ import {
 } from './dto/response';
 import {
   CreateArticleService,
+  DeleteArticleService,
   GetArticleService,
   UpdateArticleService,
 } from './services';
@@ -35,6 +37,7 @@ export class ArticleController {
     private readonly createArticleService: CreateArticleService,
     private readonly getArticleService: GetArticleService,
     private readonly updateArticleService: UpdateArticleService,
+    private readonly deleteArticleService: DeleteArticleService,
   ) {}
 
   @Post()
@@ -67,5 +70,14 @@ export class ArticleController {
       articleID,
       reqeust,
     );
+  }
+
+  @Delete(':id')
+  @UseGuards(AuthGuard)
+  async deleteArticle(
+    @GetUser() userInfo: UserInfo,
+    @Param('id', ParseIntPipe) articleID: number,
+  ): Promise<void> {
+    return await this.deleteArticleService.execute(userInfo, articleID);
   }
 }
