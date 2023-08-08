@@ -3,6 +3,7 @@ import { ArticleController } from './article.controller';
 import { GRPCModule } from 'src/global/modules/grpc/grpc.module';
 import {
   CreateArticleService,
+  DeleteArticleService,
   GetArticleService,
   UpdateArticleService,
 } from './services';
@@ -16,6 +17,7 @@ import { UserModule } from '../user/user.module';
     CreateArticleService,
     GetArticleService,
     UpdateArticleService,
+    DeleteArticleService,
   ],
 })
 export class ArticleModule {}
