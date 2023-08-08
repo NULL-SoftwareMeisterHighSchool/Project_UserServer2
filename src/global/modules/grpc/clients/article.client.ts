@@ -45,6 +45,26 @@ export class ArticleClient {
     });
   }
 
+  async setVisibility(
+    msg: articles.SetArticleVisibilityRequest,
+  ): Promise<void> {
+    return new Promise((resolve, reject) => {
+      this.articleService.SetArticleVisibility(msg, {}, (err: ServiceError) => {
+        if (err.code !== Status.OK) return reject(err);
+        resolve();
+      });
+    });
+  }
+
+  async toggleLike(msg: articles.ToggleArticleLikeRequest): Promise<void> {
+    return new Promise((resolve, reject) => {
+      this.articleService.ToggleArticleLike(msg, {}, (err: ServiceError) => {
+        if (err.code !== Status.OK) return reject(err);
+        resolve();
+      });
+    });
+  }
+
   async deleteArticle(msg: articles.DeleteArticleRequest): Promise<void> {
     return new Promise((resolve, reject) => {
       this.articleService.DeleteArticle(msg, {}, (err: ServiceError) => {
@@ -54,23 +74,48 @@ export class ArticleClient {
     });
   }
 
-  async listArticleByAuthor(): Promise<> {
+  async listArticleByAuthor(
+    msg: articles.ListArticleByAuthorRequest,
+  ): Promise<articles.ListArticleResponse> {
     return new Promise((resolve, reject) => {
-      this.articleService.ListArticleByAuthor(msg, {}, (err: ServiceError) => {
-        if (err.code !== Status.OK) return reject(err);
-        resolve();
-      });
+      this.articleService.ListArticleByAuthor(
+        msg,
+        {},
+        (err: ServiceError, value: articles.ListArticleResponse) => {
+          if (err.code !== Status.OK) return reject(err);
+          resolve(value);
+        },
+      );
     });
   }
 
-  async listArticleByAuthor(): Promise<> {
+  async listArticle(
+    msg: articles.ListArticleRequest,
+  ): Promise<articles.ListArticleResponse> {
     return new Promise((resolve, reject) => {
-      this.articleService.ListArticleByAuthor(msg, {}, (err: ServiceError) => {
-        if (err.code !== Status.OK) return reject(err);
-        resolve();
-      });
+      this.articleService.ListArticle(
+        msg,
+        {},
+        (err: ServiceError, value: articles.ListArticleResponse) => {
+          if (err.code !== Status.OK) return reject(err);
+          resolve(value);
+        },
+      );
     });
   }
 
-  async getArticle();
+  async getArticle(
+    msg: articles.GetArticleRequest,
+  ): Promise<articles.GetArticleResponse> {
+    return new Promise((resolve, reject) => {
+      this.articleService.GetArticle(
+        msg,
+        {},
+        (err: ServiceError, value: articles.GetArticleResponse) => {
+          if (err.code !== Status.OK) return reject(err);
+          resolve(value);
+        },
+      );
+    });
+  }
 }
