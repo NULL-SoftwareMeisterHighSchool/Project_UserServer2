@@ -27,6 +27,7 @@ import {
   DeleteArticleService,
   GetArticleService,
   SetVisibilityService,
+  ToggleLikeService,
   UpdateArticleService,
 } from './services';
 import { RPCExceptionFilter } from 'src/global/exceptions/filters/rpc-exception.filter';
@@ -41,6 +42,7 @@ export class ArticleController {
     private readonly updateArticleService: UpdateArticleService,
     private readonly deleteArticleService: DeleteArticleService,
     private readonly setVisibilityService: SetVisibilityService,
+    private readonly toggleLikeService: ToggleLikeService,
   ) {}
 
   @Post()
@@ -90,5 +92,20 @@ export class ArticleController {
     @GetUser() userInfo: UserInfo,
     @Param('id', ParseIntPipe) articleID: number,
     @Body() request: SetVisibilityReqeustDto,
-  ): Promise<void> {}
+  ): Promise<void> {
+    return await this.setVisibilityService.execute(
+      userInfo,
+      articleID,
+      request,
+    );
+  }
+
+  @Post(':id/like')
+  @UseGuards(AuthGuard)
+  async toggleLike(
+    @GetUser() userInfo: UserInfo,
+    @Param('id', ParseIntPipe) articleID: number,
+  ): Promise<void> {
+    return await this.toggleLikeService.execute(userInfo, articleID);
+  }
 }
