@@ -17,6 +17,7 @@ import {
 } from './services';
 import { PasswordManager } from './utils';
 import { GRPCModule } from 'src/global/modules/grpc/grpc.module';
+import { UpdateGithubStatService } from './schedule/update-github-stat.service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Stack, Stat, User]), GRPCModule],
@@ -29,6 +30,7 @@ import { GRPCModule } from 'src/global/modules/grpc/grpc.module';
     UpdatePasswordService,
     WithdrawService,
     GetRankService,
+    UpdateGithubStatService,
 
     // utils
     PasswordManager,
