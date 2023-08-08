@@ -6,7 +6,7 @@ import { commnets } from 'src/global/grpc/types/comments/service';
 @Injectable()
 export class CommentClient {
   private readonly commentService = new commnets.CommentServiceClient(
-    `http://${process.env.USER_SERVER_HOST}:${process.env.USER_SERVER_PORT}`,
+    `http://${process.env.ARTICLE_SERVER_HOST}:${process.env.ARTICLE_SERVER_PORT}`,
     credentials.createInsecure(),
   );
 
