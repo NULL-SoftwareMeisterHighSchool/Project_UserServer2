@@ -5,6 +5,7 @@ import {
   CreateArticleService,
   DeleteArticleService,
   GetArticleService,
+  SetVisibilityService,
   UpdateArticleService,
 } from './services';
 import { UserModule } from '../user/user.module';
@@ -18,6 +19,7 @@ import { UserModule } from '../user/user.module';
     GetArticleService,
     UpdateArticleService,
     DeleteArticleService,
+    SetVisibilityService,
   ],
 })
 export class ArticleModule {}
