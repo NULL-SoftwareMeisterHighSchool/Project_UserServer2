@@ -6,6 +6,7 @@ import {
   DeleteArticleService,
   GetArticleService,
   SetVisibilityService,
+  ToggleLikeService,
   UpdateArticleService,
 } from './services';
 import { UserModule } from '../user/user.module';
@@ -20,6 +21,7 @@ import { UserModule } from '../user/user.module';
     UpdateArticleService,
     DeleteArticleService,
     SetVisibilityService,
+    ToggleLikeService,
   ],
 })
 export class ArticleModule {}
