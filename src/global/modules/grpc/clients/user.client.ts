@@ -6,7 +6,7 @@ import { users } from 'src/global/grpc/types/users/service';
 @Injectable()
 export class UserClient {
   private readonly userEventService = new users.UserEventServiceClient(
-    `http://${process.env.ARTICLE_SERVER_HOST}:${process.env.ARTICLE_SERVER_PORT}`,
+    `${process.env.ARTICLE_SERVER_HOST}:${process.env.ARTICLE_SERVER_PORT}`,
     credentials.createInsecure(),
   );
 
