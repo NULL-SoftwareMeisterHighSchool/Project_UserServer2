@@ -1,6 +1,7 @@
 import { ListArticleElementDto } from 'src/domain/article/dto/response';
 import { User } from '../../entities';
 import { convertToKorDate } from 'src/global/util/lib';
+import { articles } from 'src/global/grpc/types/articles/service';
 
 export class GetUserResponseDto {
   public readonly name: string;
@@ -15,7 +16,11 @@ export class GetUserResponseDto {
     tech: ListArticleElementDto[];
   };
 
-  public static of(user: User): GetUserResponseDto {
+  public static of(
+    user: User,
+    generalArticleList: articles.ListArticleElement[],
+    techArticleList: articles.ListArticleElement[],
+  ): GetUserResponseDto {
     return {
       name: user.name,
       bio: user.bio,
@@ -24,26 +29,28 @@ export class GetUserResponseDto {
       portfolioURL: user.portfolioURL,
       stacks: user.stacks.map((stack) => stack.name),
       articles: {
-        general: [
-          {
-            id: 123,
-            author: { id: 3, name: '김원욱' },
-            createdAt: convertToKorDate(new Date()),
-            title: '안녕 이건 제목',
-            summary: '안녕 이건 요약',
-            thumbnail: '',
+        general: generalArticleList.map((article) => ({
+          author: {
+            id: user.id,
+            name: user.name,
           },
-        ],
-        tech: [
-          {
-            id: 5,
-            author: { id: 3, name: '김원욱' },
-            createdAt: convertToKorDate(new Date()),
-            title: '안녕 이건 제목',
-            summary: '안녕 이건 요약',
-            thumbnail: 'https://source.unsplash.com/random',
+          createdAt: convertToKorDate(new Date(article.createdAt.nanos / 1000)),
+          id: article.articleID,
+          summary: article.summary,
+          thumbnail: article.thumbnail,
+          title: article.title,
+        })),
+        tech: techArticleList.map((article) => ({
+          author: {
+            id: user.id,
+            name: user.name,
           },
-        ],
+          createdAt: convertToKorDate(new Date(article.createdAt.nanos / 1000)),
+          id: article.articleID,
+          summary: article.summary,
+          thumbnail: article.thumbnail,
+          title: article.title,
+        })),
       },
     };
   }

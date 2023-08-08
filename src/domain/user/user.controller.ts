@@ -31,6 +31,7 @@ import {
 } from './services';
 import { UpdateMeRequestDto, UpdatePasswordRequestDto } from './dto/request';
 import { SchoolType } from './enums';
+import { OptionalGuard } from 'src/global/guards/optional.guard';
 
 @Controller('users')
 export class UserController {
@@ -46,7 +47,7 @@ export class UserController {
   @Get('me')
   @UseGuards(AuthGuard)
   async getMe(@GetUser() userInfo: UserInfo): Promise<GetUserResponseDto> {
-    return await this.getUserService.execute(userInfo.id);
+    return await this.getUserService.execute(userInfo, userInfo.id);
   }
 
   @Put('me')
@@ -71,10 +72,12 @@ export class UserController {
   }
 
   @Get(':userID')
+  @UseGuards(OptionalGuard)
   async getUser(
+    @GetUser() userInfo: UserInfo,
     @Param('userID', ParseIntPipe) userID: number,
   ): Promise<GetUserResponseDto> {
-    return await this.getUserService.execute(userID);
+    return await this.getUserService.execute(userInfo, userID);
   }
 
   @Get('me/tiny')
