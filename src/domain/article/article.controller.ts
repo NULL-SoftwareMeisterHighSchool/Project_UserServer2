@@ -4,9 +4,11 @@ import {
   Delete,
   Get,
   Param,
+  ParseEnumPipe,
   ParseIntPipe,
   Post,
   Put,
+  Query,
   UseFilters,
   UseGuards,
 } from '@nestjs/common';
@@ -21,17 +23,20 @@ import {
 import {
   CreateArticleResponseDto,
   GetArticleResponseDto,
+  ListArticleResponseDto,
 } from './dto/response';
 import {
   CreateArticleService,
   DeleteArticleService,
   GetArticleService,
+  ListArticleService,
   SetVisibilityService,
   ToggleLikeService,
   UpdateArticleService,
 } from './services';
 import { RPCExceptionFilter } from 'src/global/exceptions/filters/rpc-exception.filter';
 import { OptionalGuard } from 'src/global/guards/optional.guard';
+import { ArticleOrder, ArticleType } from './enum';
 
 @Controller('articles')
 @UseFilters(RPCExceptionFilter)
@@ -43,7 +48,34 @@ export class ArticleController {
     private readonly deleteArticleService: DeleteArticleService,
     private readonly setVisibilityService: SetVisibilityService,
     private readonly toggleLikeService: ToggleLikeService,
+    private readonly listArticleService: ListArticleService,
   ) {}
+
+  @Post()
+  @UseGuards(OptionalGuard)
+  async listArticle(
+    @GetUser() userInfo: UserInfo,
+    @Query('type', new ParseEnumPipe(ArticleType)) type: ArticleType,
+    @Query('duration_start') durationStart: string,
+    @Query('duration_end') durationEnd: string,
+    @Query('offset', ParseIntPipe) offset: number,
+    @Query('limit', ParseIntPipe) limit: number,
+    @Query('order', new ParseEnumPipe(ArticleOrder)) order: ArticleOrder,
+
+    @Query('query') query?: string,
+    @Query('authorID', new ParseIntPipe({ optional: true })) authorID?: number,
+  ): Promise<ListArticleResponseDto> {
+    return await this.listArticleService.execute(userInfo, {
+      type,
+      offset,
+      limit,
+      order,
+      durationEnd,
+      durationStart,
+      authorID,
+      query,
+    });
+  }
 
   @Post()
   @UseGuards(AuthGuard)
