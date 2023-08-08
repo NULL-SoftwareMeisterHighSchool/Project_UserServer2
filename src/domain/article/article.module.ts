@@ -5,6 +5,7 @@ import {
   CreateArticleService,
   DeleteArticleService,
   GetArticleService,
+  ListArticleService,
   SetVisibilityService,
   ToggleLikeService,
   UpdateArticleService,
@@ -22,6 +23,7 @@ import { UserModule } from '../user/user.module';
     DeleteArticleService,
     SetVisibilityService,
     ToggleLikeService,
+    ListArticleService,
   ],
 })
 export class ArticleModule {}
