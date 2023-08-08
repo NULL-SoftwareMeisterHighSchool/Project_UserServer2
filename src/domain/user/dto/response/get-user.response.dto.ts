@@ -34,7 +34,9 @@ export class GetUserResponseDto {
             id: user.id,
             name: user.name,
           },
-          createdAt: convertToKorDate(new Date(article.createdAt.nanos / 1000)),
+          createdAt: convertToKorDate(
+            new Date(article.createdAt.seconds * 1000),
+          ),
           id: article.articleID,
           summary: article.summary,
           thumbnail: article.thumbnail,
@@ -45,7 +47,9 @@ export class GetUserResponseDto {
             id: user.id,
             name: user.name,
           },
-          createdAt: convertToKorDate(new Date(article.createdAt.nanos / 1000)),
+          createdAt: convertToKorDate(
+            new Date(article.createdAt.seconds * 1000),
+          ),
           id: article.articleID,
           summary: article.summary,
           thumbnail: article.thumbnail,

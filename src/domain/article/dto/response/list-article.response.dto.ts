@@ -19,7 +19,9 @@ export class ListArticleResponseDto {
             id: article.authorID,
             name: authorNameMap.get(article.authorID),
           },
-          createdAt: convertToKorDate(new Date(article.createdAt.nanos / 1000)),
+          createdAt: convertToKorDate(
+            new Date(article.createdAt.seconds * 1000),
+          ),
           summary: article.summary,
           thumbnail: article.thumbnail,
           title: article.title,

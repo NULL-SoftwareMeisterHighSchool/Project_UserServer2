@@ -39,7 +39,10 @@ export class GetArticleService {
         userID: userInfo ? userInfo.id : undefined,
       }),
     );
-    const authorNameMap = await this.getAuthorNameMap(commentList.comments);
+
+    let authorNameMap: Map<number, string>;
+    if (commentList.comments.length > 0)
+      authorNameMap = await this.getAuthorNameMap(commentList.comments);
 
     return GetArticleResponseDto.of(
       article,
@@ -56,12 +59,14 @@ export class GetArticleService {
 
     const results = await this.userRepository
       .createQueryBuilder('user')
-      .where('id IN (:ids)', { ids: idSet.values() })
+      .where('id IN (:ids)', { ids: Array.from(idSet) })
       .select(['user.name', 'user.id'])
       .getRawMany();
 
     const resultMap = new Map<number, string>();
-    results.forEach((result) => resultMap.set(result.id, result.name));
+    results.forEach((result) =>
+      resultMap.set(result.user_id, result.user_name),
+    );
 
     return resultMap;
   }

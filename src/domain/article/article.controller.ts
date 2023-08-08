@@ -3,6 +3,8 @@ import {
   Controller,
   Delete,
   Get,
+  HttpCode,
+  HttpStatus,
   Param,
   ParseEnumPipe,
   ParseIntPipe,
@@ -110,6 +112,7 @@ export class ArticleController {
   }
 
   @Delete(':id')
+  @HttpCode(HttpStatus.NO_CONTENT)
   @UseGuards(AuthGuard)
   async deleteArticle(
     @GetUser() userInfo: UserInfo,
@@ -133,6 +136,7 @@ export class ArticleController {
   }
 
   @Post(':id/like')
+  @HttpCode(HttpStatus.OK)
   @UseGuards(AuthGuard)
   async toggleLike(
     @GetUser() userInfo: UserInfo,

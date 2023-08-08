@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { UserRepository } from 'src/domain/user/repositories';
 import { ArticleClient } from 'src/global/modules/grpc/clients';
 import { ArticleOrder, ArticleType } from '../enum';
@@ -59,14 +59,17 @@ export class ListArticleService {
         amount: params.limit,
         offset: params.offset,
         authorID: params.authorID,
-        duration: {
-          start: google.protobuf.Timestamp.fromObject({
-            seconds: fromKorDate(params.durationStart).getTime() / 1000,
-          }),
-          end: google.protobuf.Timestamp.fromObject({
-            seconds: fromKorDate(params.durationEnd).getTime() / 1000,
-          }),
-        },
+        duration:
+          params.durationStart && params.durationEnd
+            ? {
+                start: google.protobuf.Timestamp.fromObject({
+                  seconds: fromKorDate(params.durationStart).getTime() / 1000,
+                }),
+                end: google.protobuf.Timestamp.fromObject({
+                  seconds: fromKorDate(params.durationEnd).getTime() / 1000,
+                }),
+              }
+            : undefined,
         order: order,
         query: params.query,
         type: type,
@@ -74,7 +77,9 @@ export class ListArticleService {
       }),
     );
 
-    const authorNameMap = await this.getAuthorNameMap(articleList.articles);
+    let authorNameMap: Map<number, string>;
+    if (articleList.articles.length > 0)
+      authorNameMap = await this.getAuthorNameMap(articleList.articles);
 
     return ListArticleResponseDto.of(
       articleList.articles,
@@ -90,12 +95,14 @@ export class ListArticleService {
 
     const results = await this.userRepository
       .createQueryBuilder('user')
-      .where('id IN (:ids)', { ids: idSet.values() })
+      .where('id IN (:ids)', { ids: Array.from(idSet) })
       .select(['user.name', 'user.id'])
       .getRawMany();
 
     const resultMap = new Map<number, string>();
-    results.forEach((result) => resultMap.set(result.id, result.name));
+    results.forEach((result) =>
+      resultMap.set(result.user_id, result.user_name),
+    );
 
     return resultMap;
   }

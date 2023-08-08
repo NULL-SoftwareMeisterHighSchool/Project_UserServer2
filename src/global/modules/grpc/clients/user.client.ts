@@ -14,7 +14,7 @@ export class UserClient {
     return new Promise((resolve, reject) => {
       const msg = users.CreateUserEvent.fromObject({ userID });
       this.userEventService.PublishUserCreated(msg, (err: ServiceError) => {
-        if (err.code === Status.UNKNOWN) return reject(err.message);
+        if (err?.code === Status.UNKNOWN) return reject(err.message);
         resolve();
       });
     });
@@ -24,7 +24,7 @@ export class UserClient {
     return new Promise((resolve, reject) => {
       const msg = users.DeleteUserEvent.fromObject({ userID });
       this.userEventService.PublishUserDeleted(msg, (err: ServiceError) => {
-        if (err.code === Status.UNKNOWN) return reject(err.message);
+        if (err?.code === Status.UNKNOWN) return reject(err.message);
         resolve();
       });
     });
@@ -41,7 +41,7 @@ export class UserClient {
       this.userEventService.GetGithubStats(
         msg,
         (err: ServiceError, value: users.GetGithubStatsResponse) => {
-          if (err.code === Status.UNKNOWN) return reject(err.message);
+          if (err?.code === Status.UNKNOWN) return reject(err.message);
           resolve(value.statElems);
         },
       );

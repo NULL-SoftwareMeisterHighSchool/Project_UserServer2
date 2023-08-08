@@ -1,5 +1,4 @@
 import { ServiceError, credentials } from '@grpc/grpc-js';
-import { Status } from '@grpc/grpc-js/build/src/constants';
 import { Injectable } from '@nestjs/common';
 import { articles } from 'src/global/grpc/types/articles/service';
 
@@ -16,7 +15,7 @@ export class ArticleClient {
         msg,
         {},
         (err: ServiceError, value: articles.CreateArticleResponse) => {
-          if (err.code !== Status.OK) return reject(err);
+          if (err) return reject(err);
           resolve(value.articleID);
         },
       );
@@ -28,7 +27,7 @@ export class ArticleClient {
   ): Promise<void> {
     return new Promise((resolve, reject) => {
       this.articleService.UpdateArticleBody(msg, {}, (err: ServiceError) => {
-        if (err.code !== Status.OK) return reject(err);
+        if (err) return reject(err);
         resolve();
       });
     });
@@ -39,7 +38,7 @@ export class ArticleClient {
   ): Promise<void> {
     return new Promise((resolve, reject) => {
       this.articleService.UpdateArticleTitle(msg, {}, (err: ServiceError) => {
-        if (err.code !== Status.OK) return reject(err);
+        if (err) return reject(err);
         resolve();
       });
     });
@@ -50,7 +49,7 @@ export class ArticleClient {
   ): Promise<void> {
     return new Promise((resolve, reject) => {
       this.articleService.SetArticleVisibility(msg, {}, (err: ServiceError) => {
-        if (err.code !== Status.OK) return reject(err);
+        if (err) return reject(err);
         resolve();
       });
     });
@@ -59,7 +58,7 @@ export class ArticleClient {
   async toggleLike(msg: articles.ToggleArticleLikeRequest): Promise<void> {
     return new Promise((resolve, reject) => {
       this.articleService.ToggleArticleLike(msg, {}, (err: ServiceError) => {
-        if (err.code !== Status.OK) return reject(err);
+        if (err) return reject(err);
         resolve();
       });
     });
@@ -68,7 +67,7 @@ export class ArticleClient {
   async deleteArticle(msg: articles.DeleteArticleRequest): Promise<void> {
     return new Promise((resolve, reject) => {
       this.articleService.DeleteArticle(msg, {}, (err: ServiceError) => {
-        if (err.code !== Status.OK) return reject(err);
+        if (err) return reject(err);
         resolve();
       });
     });
@@ -82,7 +81,7 @@ export class ArticleClient {
         msg,
         {},
         (err: ServiceError, value: articles.ListArticleResponse) => {
-          if (err.code !== Status.OK) return reject(err);
+          if (err) return reject(err);
           resolve(value);
         },
       );
@@ -97,7 +96,7 @@ export class ArticleClient {
         msg,
         {},
         (err: ServiceError, value: articles.ListArticleResponse) => {
-          if (err.code !== Status.OK) return reject(err);
+          if (err) return reject(err);
           resolve(value);
         },
       );
@@ -112,7 +111,7 @@ export class ArticleClient {
         msg,
         {},
         (err: ServiceError, value: articles.GetArticleResponse) => {
-          if (err.code !== Status.OK) return reject(err);
+          if (err) return reject(err);
           resolve(value);
         },
       );

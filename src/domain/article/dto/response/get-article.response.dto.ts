@@ -47,8 +47,8 @@ export class GetArticleResponseDto {
       },
       body: article.body,
       commentCount: article.comments,
-      createdAt: convertToKorDate(new Date(article.createdAt.nanos / 1000)),
-      updatedAt: convertToKorDate(new Date(article.updatedAt.nanos / 1000)),
+      createdAt: convertToKorDate(new Date(article.createdAt.seconds * 1000)),
+      updatedAt: convertToKorDate(new Date(article.updatedAt.seconds * 1000)),
       isAuthor: article.isAuthor,
       isLiked: article.isLiked,
       isPrivate: article.isPrivate,
@@ -62,7 +62,7 @@ export class GetArticleResponseDto {
         },
         commentID: comment.commentID,
         content: comment.body,
-        createdAt: convertToKorDate(new Date(comment.createdAt.nanos / 1000)),
+        createdAt: convertToKorDate(new Date(comment.createdAt.seconds * 1000)),
       })),
     };
   }
