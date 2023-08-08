@@ -16,6 +16,7 @@ import {
   WithdrawService,
 } from './services';
 import { PasswordManager } from './utils';
+import { UserClient } from './client/user.client';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Stack, Stat, User])],
@@ -32,11 +33,14 @@ import { PasswordManager } from './utils';
     // utils
     PasswordManager,
 
+    // client
+    UserClient,
+
     // repositories
     StackRepository,
     StatRepository,
     UserRepository,
   ],
-  exports: [UserRepository, PasswordManager],
+  exports: [UserRepository, PasswordManager, UserClient],
 })
 export class UserModule {}

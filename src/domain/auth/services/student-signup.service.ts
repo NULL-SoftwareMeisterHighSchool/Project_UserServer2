@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { StudentSignupRequestDto } from '../dto/request';
 import { UserRepository } from 'src/domain/user/repositories';
 import { EMAIL_SUFFIXES, SCHOOL_FOUNDATIONS } from '../constants';
@@ -13,6 +13,7 @@ import {
 import { MailVerificationManager } from '../utils';
 import { Stat } from 'src/domain/user/entities';
 import { PasswordManager } from 'src/domain/user/utils';
+import { UserClient } from 'src/domain/user/client/user.client';
 
 @Injectable()
 export class StudentSignupService {
@@ -20,6 +21,7 @@ export class StudentSignupService {
     private readonly userRepository: UserRepository,
     private readonly passwordManager: PasswordManager,
     private readonly mailVerificationManager: MailVerificationManager,
+    private readonly userClient: UserClient,
   ) {}
 
   async execute(request: StudentSignupRequestDto): Promise<void> {
@@ -55,7 +57,10 @@ export class StudentSignupService {
       schoolType: request.school,
       stat: new Stat(),
     });
-    await this.userRepository.save(user);
+    const { id } = await this.userRepository.save(user);
+    await this.userClient.createUser(id).catch((msg: string) => {
+      throw new InternalServerErrorException(msg);
+    });
   }
 
   private isEmailWrongSchool(school: SchoolType, email: string): boolean {
