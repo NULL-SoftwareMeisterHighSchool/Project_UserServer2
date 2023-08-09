@@ -1,4 +1,5 @@
 import {
+  ArrayMaxSize,
   IsNotEmpty,
   IsOptional,
   IsString,
@@ -15,6 +16,7 @@ export class UpdateMeRequestDto {
   @IsOptional()
   @IsNotEmpty({ each: true })
   @IsString({ each: true })
+  @ArrayMaxSize(5)
   stacks: string[];
 
   @IsOptional()
