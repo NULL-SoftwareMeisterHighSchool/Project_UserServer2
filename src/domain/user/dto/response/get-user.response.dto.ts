@@ -7,7 +7,7 @@ export class GetUserResponseDto {
   public readonly name: string;
   public readonly email: string;
   public readonly bio: string;
-  public readonly githubURL: string;
+  public readonly githubID: string;
   public readonly portfolioURL: string;
 
   public readonly stacks: string[];
@@ -25,7 +25,7 @@ export class GetUserResponseDto {
       name: user.name,
       bio: user.bio,
       email: user.email,
-      githubURL: user.githubURL,
+      githubID: user.githubID,
       portfolioURL: user.portfolioURL,
       stacks: user.stacks.map((stack) => stack.name),
       articles: {

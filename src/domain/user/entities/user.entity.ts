@@ -31,9 +31,6 @@ export class User {
   bio: string;
 
   @Column({ default: '' })
-  githubURL: string;
-
-  @Column({ default: '' })
   portfolioURL: string;
 
   @Column({ unique: true })

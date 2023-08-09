@@ -1,8 +1,15 @@
-import { IsNotEmpty, IsOptional, IsString, IsUrl } from 'class-validator';
+import {
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  IsUrl,
+  MaxLength,
+} from 'class-validator';
 
 export class UpdateMeRequestDto {
   @IsOptional()
   @IsString()
+  @MaxLength(50)
   bio: string;
 
   @IsOptional()
@@ -11,8 +18,9 @@ export class UpdateMeRequestDto {
   stacks: string[];
 
   @IsOptional()
-  @IsUrl()
-  githubURL: string;
+  @IsNotEmpty()
+  @IsString()
+  githubID: string;
 
   @IsOptional()
   @IsUrl()

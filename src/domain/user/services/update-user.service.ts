@@ -22,7 +22,7 @@ export class UpdateUserService {
       });
 
     if (request.bio) user.bio = request.bio;
-    if (request.githubURL) user.githubURL = request.githubURL;
+    if (request.githubID) user.githubID = request.githubID;
     if (request.portfolioURL) user.portfolioURL = request.portfolioURL;
 
     if (request.stacks.length > 0) {
