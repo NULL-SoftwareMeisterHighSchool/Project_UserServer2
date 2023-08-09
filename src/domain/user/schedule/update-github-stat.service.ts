@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { StatRepository, UserRepository } from '../repositories';
 import { Cron, CronExpression } from '@nestjs/schedule';
 import { UserClient } from 'src/global/modules/grpc/clients';
@@ -9,6 +9,7 @@ import { users } from 'src/global/grpc/types/users/service';
 export class UpdateGithubStatService {
   private readonly BATCH_SIZE = 100;
   private batchSequence = 1;
+  private logger = new Logger(UpdateGithubStatService.name);
 
   constructor(
     private readonly userRepository: UserRepository,
@@ -16,7 +17,7 @@ export class UpdateGithubStatService {
     private readonly userClient: UserClient,
   ) {}
 
-  @Cron(CronExpression.EVERY_HOUR)
+  @Cron(CronExpression.EVERY_5_MINUTES)
   async execute(): Promise<void> {
     const users = await this.userRepository.find({
       skip: (this.batchSequence - 1) * this.BATCH_SIZE,
@@ -63,6 +64,7 @@ export class UpdateGithubStatService {
         ['id'],
       )
       .execute();
+    this.logger.log('finished updating stats: ' + stats.length);
   }
 
   private calculateScore(stat: users.GithubStats): number {
