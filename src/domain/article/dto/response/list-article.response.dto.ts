@@ -25,6 +25,8 @@ export class ListArticleResponseDto {
           summary: article.summary,
           thumbnail: article.thumbnail,
           title: article.title,
+          likes: article.likes,
+          views: article.views,
         }),
       ),
       totalCount: totalCount,

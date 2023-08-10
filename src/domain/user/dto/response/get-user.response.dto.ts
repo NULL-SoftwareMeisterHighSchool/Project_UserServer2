@@ -41,6 +41,8 @@ export class GetUserResponseDto {
           summary: article.summary,
           thumbnail: article.thumbnail,
           title: article.title,
+          likes: article.likes,
+          views: article.views,
         })),
         tech: techArticleList.map((article) => ({
           author: {
@@ -54,6 +56,8 @@ export class GetUserResponseDto {
           summary: article.summary,
           thumbnail: article.thumbnail,
           title: article.title,
+          likes: article.likes,
+          views: article.views,
         })),
       },
     };

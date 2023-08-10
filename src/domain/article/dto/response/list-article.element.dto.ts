@@ -7,4 +7,6 @@ export class ListArticleElementDto {
   public readonly summary: string;
   public readonly author: UserInfo;
   public readonly createdAt: string;
+  public readonly likes: number;
+  public readonly views: number;
 }
