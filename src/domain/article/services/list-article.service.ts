@@ -1,4 +1,4 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { UserRepository } from 'src/domain/user/repositories';
 import { ArticleClient } from 'src/global/modules/grpc/clients';
 import { ArticleOrder, ArticleType } from '../enum';

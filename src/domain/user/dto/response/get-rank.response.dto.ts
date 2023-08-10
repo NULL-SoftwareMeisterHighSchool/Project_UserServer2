@@ -1,4 +1,3 @@
-import { Logger } from '@nestjs/common';
 import { Stat } from '../../entities';
 import { SchoolType } from '../../enums';
 
@@ -14,7 +13,6 @@ export class GetRankResponseDto {
   public readonly rank: RankElementDto[];
 
   public static of(stats: Stat[]): GetRankResponseDto {
-    new Logger().error(stats.map((stat) => ({ ...stat })));
     return {
       rank: stats.map(
         (stat): RankElementDto => ({
