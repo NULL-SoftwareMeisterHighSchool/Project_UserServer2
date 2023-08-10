@@ -32,7 +32,6 @@ export class GetUserService {
       order: articles.ListArticleOrder.TIME,
       authorID: userID,
       userID: userInfo && userInfo.id === userID ? userID : undefined,
-      isPrivate: userInfo && userInfo.id === userID,
       type: articles.ArticleType.GENERAL,
     };
 
