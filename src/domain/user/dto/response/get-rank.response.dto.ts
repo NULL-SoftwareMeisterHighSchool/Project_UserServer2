@@ -2,6 +2,7 @@ import { Stat } from '../../entities';
 import { SchoolType } from '../../enums';
 
 type RankElementDto = {
+  readonly id: number;
   readonly name: string;
   readonly school: SchoolType;
   readonly admissionYear: number;
@@ -16,6 +17,7 @@ export class GetRankResponseDto {
     return {
       rank: stats.map(
         (stat): RankElementDto => ({
+          id: stat.user.id,
           admissionYear: stat.user.admissionYear,
           school: stat.user.schoolType,
           commitCount: stat.contributionCount,
