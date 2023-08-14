@@ -25,7 +25,7 @@ export class UpdateUserService {
     if (request.githubID) user.githubID = request.githubID;
     if (request.portfolioURL) user.portfolioURL = request.portfolioURL;
 
-    if (request.stacks.length > 0) {
+    if (request.stacks?.length > 0) {
       const stacks = request.stacks.map(
         (stackName): Stack => this.stackRepository.create({ name: stackName }),
       );

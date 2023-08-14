@@ -5,6 +5,7 @@ import {
   IsString,
   IsUrl,
   MaxLength,
+  ValidateIf,
 } from 'class-validator';
 
 export class UpdateMeRequestDto {
@@ -25,6 +26,7 @@ export class UpdateMeRequestDto {
   githubID: string;
 
   @IsOptional()
+  @ValidateIf((_, url) => url !== '')
   @IsUrl()
   portfolioURL: string;
 }
