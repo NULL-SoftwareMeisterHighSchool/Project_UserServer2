@@ -1,4 +1,4 @@
-import { IsEnum, IsNotEmpty, IsString } from 'class-validator';
+import { IsEnum, IsNotEmpty, IsString, MaxLength } from 'class-validator';
 import { ArticleType } from '../../enum';
 
 export class CreateArticleRequestDto {
@@ -8,6 +8,7 @@ export class CreateArticleRequestDto {
 
   @IsNotEmpty()
   @IsString()
+  @MaxLength(20)
   title: string;
 
   @IsNotEmpty()
