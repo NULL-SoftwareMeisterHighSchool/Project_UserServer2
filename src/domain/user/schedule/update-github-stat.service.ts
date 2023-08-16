@@ -17,7 +17,7 @@ export class UpdateGithubStatService {
     private readonly userClient: UserClient,
   ) {}
 
-  @Cron(CronExpression.EVERY_HOUR)
+  @Cron(CronExpression.EVERY_30_MINUTES)
   async execute(): Promise<void> {
     const users = await this.userRepository.find({
       skip: (this.batchSequence - 1) * this.BATCH_SIZE,
