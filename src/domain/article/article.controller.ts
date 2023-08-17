@@ -39,6 +39,7 @@ import {
 import { RPCExceptionFilter } from 'src/global/exceptions/filters/rpc-exception.filter';
 import { OptionalGuard } from 'src/global/guards/optional.guard';
 import { ArticleOrder, ArticleType } from './enum';
+import { ThrottlerGuard } from '@nestjs/throttler';
 
 @Controller('articles')
 @UseFilters(RPCExceptionFilter)
@@ -89,7 +90,7 @@ export class ArticleController {
   }
 
   @Get(':id')
-  @UseGuards(OptionalGuard)
+  @UseGuards(ThrottlerGuard, OptionalGuard)
   async getArticle(
     @GetUser() userInfo: UserInfo,
     @Param('id', ParseIntPipe) articleID: number,

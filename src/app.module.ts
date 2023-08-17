@@ -11,6 +11,7 @@ import { ConfigModule } from '@nestjs/config';
 import { JwtModule } from './global/modules/jwt';
 import { GRPCModule } from './global/modules/grpc/grpc.module';
 import { ScheduleModule } from '@nestjs/schedule';
+import { ThrottlerModule } from '@nestjs/throttler';
 
 @Module({
   imports: [
@@ -23,6 +24,10 @@ import { ScheduleModule } from '@nestjs/schedule';
     }),
     TypeOrmModule.forRootAsync({ useFactory: () => TypeORMConfig() }),
     ScheduleModule.forRoot(),
+    ThrottlerModule.forRoot({
+      ttl: 60,
+      limit: 30,
+    }),
 
     JwtModule,
     MailModule,
