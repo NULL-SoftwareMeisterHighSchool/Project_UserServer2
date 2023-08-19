@@ -24,6 +24,8 @@ export class CreateArticleService {
       case ArticleType.TECH:
         type = articles.ArticleType.TECH;
         break;
+      case ArticleType.INTRODUCE:
+        type = articles.ArticleType.INTRODUCE;
     }
 
     const articleID = await this.articleClient.createArticle(

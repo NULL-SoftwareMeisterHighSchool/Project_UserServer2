@@ -52,6 +52,8 @@ export class ListArticleService {
       case ArticleType.TECH:
         type = articles.ArticleType.TECH;
         break;
+      case ArticleType.INTRODUCE:
+        type = articles.ArticleType.INTRODUCE;
     }
 
     const articleList = await this.articleClient.listArticle(

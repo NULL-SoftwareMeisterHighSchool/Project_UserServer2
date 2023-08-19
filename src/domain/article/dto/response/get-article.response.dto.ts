@@ -36,6 +36,8 @@ export class GetArticleResponseDto {
       case articles.ArticleType.TECH:
         articleType = ArticleType.TECH;
         break;
+      case articles.ArticleType.INTRODUCE:
+        articleType = ArticleType.INTRODUCE;
     }
 
     return {
