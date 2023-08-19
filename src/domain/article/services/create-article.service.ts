@@ -42,6 +42,15 @@ export class CreateArticleService {
         body: request.content,
       }),
     );
+    if (request.isPrivate) {
+      await this.articleClient.setVisibility(
+        articles.SetArticleVisibilityRequest.fromObject({
+          articleID: articleID,
+          isPrivate: true,
+          userID: id,
+        }),
+      );
+    }
 
     return CreateArticleResponseDto.of(articleID);
   }
