@@ -11,7 +11,7 @@ export namespace articles {
     export enum ArticleType {
         GENERAL = 0,
         TECH = 1,
-        INTRODUCE = 3
+        INTRODUCE = 2
     }
     export enum ListArticleOrder {
         TIME = 0,
