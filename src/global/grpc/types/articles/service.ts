@@ -10,7 +10,8 @@ import * as grpc_1 from "@grpc/grpc-js";
 export namespace articles {
     export enum ArticleType {
         GENERAL = 0,
-        TECH = 1
+        TECH = 1,
+        INTRODUCE = 3
     }
     export enum ListArticleOrder {
         TIME = 0,

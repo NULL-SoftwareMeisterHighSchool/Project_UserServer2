@@ -3987,7 +3987,8 @@ proto.articles.ToggleArticleLikeRequest.prototype.setUserid = function(value) {
  */
 proto.articles.ArticleType = {
   GENERAL: 0,
-  TECH: 1
+  TECH: 1,
+  INTRODUCE: 3
 };
 
 /**
