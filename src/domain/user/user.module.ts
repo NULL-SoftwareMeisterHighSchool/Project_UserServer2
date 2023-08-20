@@ -11,6 +11,7 @@ import {
   GetMyStatService,
   GetRankService,
   GetUserService,
+  ListPrivateArticleService,
   UpdatePasswordService,
   UpdateUserService,
   WithdrawService,
@@ -31,6 +32,7 @@ import { UpdateGithubStatService } from './schedule/update-github-stat.service';
     WithdrawService,
     GetRankService,
     UpdateGithubStatService,
+    ListPrivateArticleService,
 
     // utils
     PasswordManager,

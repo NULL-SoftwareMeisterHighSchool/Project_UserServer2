@@ -21,11 +21,13 @@ import {
   GetMyStatResponseDto,
   GetRankResponseDto,
   GetUserResponseDto,
+  ListPrivateArticleResponseDto,
 } from './dto/response';
 import {
   GetMyStatService,
   GetRankService,
   GetUserService,
+  ListPrivateArticleService,
   UpdatePasswordService,
   UpdateUserService,
   WithdrawService,
@@ -45,6 +47,7 @@ export class UserController {
     private readonly updatePasswordService: UpdatePasswordService,
     private readonly withdrawService: WithdrawService,
     private readonly getRankService: GetRankService,
+    private readonly listPrivateArticleService: ListPrivateArticleService,
   ) {}
 
   @Get('me')
@@ -95,6 +98,14 @@ export class UserController {
     @GetUser() userInfo: UserInfo,
   ): Promise<GetMyStatResponseDto> {
     return await this.getMyStatService.execute(userInfo.id);
+  }
+
+  @Get('me/temp-articles')
+  @UseGuards(AuthGuard)
+  async getMyTempArticles(
+    @GetUser() userInfo: UserInfo,
+  ): Promise<ListPrivateArticleResponseDto> {
+    return await this.listPrivateArticleService.execute(userInfo);
   }
 
   @Patch('me/edit-password')

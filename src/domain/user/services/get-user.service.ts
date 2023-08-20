@@ -33,6 +33,7 @@ export class GetUserService {
       authorID: userID,
       userID: userInfo && userInfo.id === userID ? userID : undefined,
       type: articles.ArticleType.GENERAL,
+      isPrivate: false,
     };
 
     const generalArticleList = await this.articleClient.listArticleByAuthor(
