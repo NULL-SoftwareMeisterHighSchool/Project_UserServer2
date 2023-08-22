@@ -1,9 +1,10 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Stack, Stat, User } from './entities';
+import { Stack, Stat, User, UserCount } from './entities';
 import {
   StackRepository,
   StatRepository,
+  UserCountRepository,
   UserRepository,
 } from './repositories';
 import { UserController } from './user.controller';
@@ -19,9 +20,13 @@ import {
 import { PasswordManager } from './utils';
 import { GRPCModule } from 'src/global/modules/grpc/grpc.module';
 import { UpdateGithubStatService } from './schedule/update-github-stat.service';
+import { LogUserCountService } from './schedule/log-user.count.service';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Stack, Stat, User]), GRPCModule],
+  imports: [
+    TypeOrmModule.forFeature([Stack, Stat, User, UserCount]),
+    GRPCModule,
+  ],
   controllers: [UserController],
   providers: [
     // services
@@ -30,9 +35,11 @@ import { UpdateGithubStatService } from './schedule/update-github-stat.service';
     GetMyStatService,
     UpdatePasswordService,
     WithdrawService,
-    GetRankService,
-    UpdateGithubStatService,
     ListPrivateArticleService,
+    UpdateGithubStatService,
+
+    GetRankService,
+    LogUserCountService,
 
     // utils
     PasswordManager,
@@ -41,6 +48,7 @@ import { UpdateGithubStatService } from './schedule/update-github-stat.service';
     StackRepository,
     StatRepository,
     UserRepository,
+    UserCountRepository,
   ],
   exports: [UserRepository, PasswordManager],
 })

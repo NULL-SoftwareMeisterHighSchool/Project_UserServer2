@@ -72,7 +72,7 @@ export class AuthController {
 
   @Post('reset-password')
   @HttpCode(HttpStatus.OK)
-  async sendRefreshMail(
+  async resetPassword(
     @Body() request: VerifyRequestDto,
   ): Promise<PasswordResponseDto> {
     return await this.resetPasswordService.execute(request);
