@@ -6,6 +6,7 @@ import {
   LoginService,
   LogoutService,
   RefreshService,
+  ResetPasswordService,
   SendMailService,
   StudentSignupService,
   VerifyService,
@@ -25,6 +26,7 @@ import { GRPCModule } from 'src/global/modules/grpc/grpc.module';
     RefreshService,
     SendMailService,
     VerifyService,
+    ResetPasswordService,
 
     // utils
     BlacklistManager,

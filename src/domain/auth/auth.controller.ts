@@ -10,11 +10,16 @@ import {
   LoginService,
   LogoutService,
   RefreshService,
+  ResetPasswordService,
   SendMailService,
   StudentSignupService,
   VerifyService,
 } from './services';
-import { LoginResponseDto, RefreshResponseDto } from './dto/response';
+import {
+  LoginResponseDto,
+  PasswordResponseDto,
+  RefreshResponseDto,
+} from './dto/response';
 
 @Controller('auth')
 export class AuthController {
@@ -25,6 +30,7 @@ export class AuthController {
     private readonly refreshService: RefreshService,
     private readonly sendMailService: SendMailService,
     private readonly verifyService: VerifyService,
+    private readonly resetPasswordService: ResetPasswordService,
   ) {}
 
   @Post('signup/student')
@@ -62,5 +68,13 @@ export class AuthController {
   @HttpCode(HttpStatus.OK)
   async verify(@Body() request: VerifyRequestDto): Promise<void> {
     return await this.verifyService.execute(request);
+  }
+
+  @Post('reset-password')
+  @HttpCode(HttpStatus.OK)
+  async sendRefreshMail(
+    @Body() request: VerifyRequestDto,
+  ): Promise<PasswordResponseDto> {
+    return await this.resetPasswordService.execute(request);
   }
 }

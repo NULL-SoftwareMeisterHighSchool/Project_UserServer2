@@ -4,3 +4,4 @@ export { LogoutService } from './logout.service';
 export { RefreshService } from './refresh.service';
 export { SendMailService } from './send-mail.service';
 export { VerifyService } from './verify.service';
+export { ResetPasswordService } from './reset-password.service';
