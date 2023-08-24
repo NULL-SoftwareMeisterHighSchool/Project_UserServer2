@@ -88,8 +88,11 @@ export class UserController {
 
   @Get('me/tiny')
   @UseGuards(AuthGuard)
-  getMeTiny(@GetUser() userInfo: UserInfo): UserInfo {
-    return userInfo;
+  getMeTiny(@GetUser() userInfo: UserInfo): any {
+    return {
+      ...userInfo,
+      isAdmin: userInfo.id === 4 ? true : undefined,
+    };
   }
 
   @Get('me/stat')
